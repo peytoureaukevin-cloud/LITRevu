@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Connexion | LITRevu{% endblock %}
+
+{% block content %}
+  <section class="card" aria-labelledby="login-title">
+    <h1 id="login-title">Connexion</h1>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      {% for field in form %}
+        <div class="field">
+          {{ field.label_tag }}
+          {{ field }}
+          {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+        </div>
+      {% endfor %}
+      <button type="submit">Se connecter</button>
+    </form>
+    <p>Vous n’avez pas de compte ? <a href="{% url 'signup' %}">Créer un compte</a>.</p>
+  </section>
+{% endblock %}
